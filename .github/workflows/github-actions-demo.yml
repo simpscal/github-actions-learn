@@ -9,5 +9,9 @@ jobs:
     environment:
       name: ${{ github.ref_name == 'main' && 'main' || 'development' }}
     steps:
-      - name: Print greeting
-        run: echo "${{ vars.E_TEST }}"
+      - name: Setup Node,js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - name: install dependencies
+        run: npm i ngx-lazy-directive

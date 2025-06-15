@@ -6,7 +6,8 @@ on:
 jobs:
   greeting:
     runs-on: ubuntu-latest
-    if: ${{ vars.TEST == 'Tu Phan' }}
+    env:
+      TEST: ${{ vars.TEST }}
     steps:
       - name: Print greeting
-        run: echo "Hello, World!"
+        run: echo $TEST

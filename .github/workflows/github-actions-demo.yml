@@ -6,6 +6,7 @@ on:
 jobs:
   greeting:
     runs-on: ubuntu-latest
+    environment: main
     steps:
       - name: Print greeting
-        run: echo "${{ secrets.TEST }}"
+        run: echo "${{ vars.E_TEST }}"

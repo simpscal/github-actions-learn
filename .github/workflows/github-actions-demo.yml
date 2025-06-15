@@ -16,4 +16,4 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v3
       - name: install dependencies
-        run: npm i ngx-lazy-directive
+        run: npm install

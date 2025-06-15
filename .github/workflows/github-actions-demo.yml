@@ -6,7 +6,8 @@ on:
 jobs:
   greeting:
     runs-on: ubuntu-latest
-    environment: main
+    environment:
+      name: ${{ github.ref_name == 'main' && 'main' || 'development' }}
     steps:
       - name: Print greeting
         run: echo "${{ vars.E_TEST }}"

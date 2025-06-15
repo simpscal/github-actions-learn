@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print greeting
-        run: echo ${{ vars.TEST }}
+        run: echo "${{ vars.TEST }}"

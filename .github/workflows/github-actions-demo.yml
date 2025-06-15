@@ -9,12 +9,16 @@ jobs:
     environment:
       name: ${{ github.ref_name == 'main' && 'main' || 'development' }}
     steps:
-      - name: Setup Node,js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
-      - name: checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
       - name: Create file
         run: |
           echo "Generated on: $(date)" >> generated-file.md
+      - name: Read Content
+        run: |
+          echo "Content of generated-file.md:"
+          cat generated-file.md

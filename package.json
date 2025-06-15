@@ -1,0 +1,14 @@
+{
+  "name": "github-actions",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "ngx-lazy-directive": "^15.1.1"
+  }
+}

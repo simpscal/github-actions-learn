@@ -9,5 +9,5 @@ jobs:
     steps:
       - name: Print greeting
         env:
-          GREETING: 123123
+          GREETING: ${{ secrets.SECRET_KEY }}
         run: echo $GREETING

@@ -6,8 +6,6 @@ on:
 jobs:
   greeting:
     runs-on: ubuntu-latest
-    env:
-      TEST: ${{ vars.TEST }}
     steps:
       - name: Print greeting
-        run: echo $TEST
+        run: echo ${{ vars.TEST }}

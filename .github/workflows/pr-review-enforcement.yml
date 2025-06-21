@@ -21,4 +21,10 @@ jobs:
               pull_number: context.issue.number,
             });
 
-            console.log(`Reviews: ${reviews}`);
+            const approvals = reviews.filter(review => review.state === 'APPROVED');
+
+            if (approvals.length < 1) {
+              core.setFailed('At least one reviewer approval is required before merging');
+            } else {
+              console.log(`✅ Found ${approvals.length} approval(s)`);
+            }

@@ -20,3 +20,5 @@ jobs:
               repo: context.repo.repo,
               pull_number: context.issue.number,
             });
+
+            console.log(`Reviews: ${reviews}`);

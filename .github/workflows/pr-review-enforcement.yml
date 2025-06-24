@@ -17,38 +17,6 @@ jobs:
   check-reviews:
     runs-on: ubuntu-latest
     steps:
-      - name: Check for required reviews
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const { data: reviews } = await github.rest.pulls.listReviews({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-            });
-
-            const approvals = reviews.filter(review => review.state === 'APPROVED');
-
-            if (approvals.length < 1) {
-              // Set status check to failure to disable merge button
-              await github.rest.repos.createCommitStatus({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                sha: context.payload.pull_request.head.sha,
-                state: 'failure',
-                context: 'review-enforcement',
-                description: 'At least one reviewer approval required'
-              });
-              core.setFailed('At least one reviewer approval is required before merging');
-            } else {
-              // Set status check to success to enable merge button
-              await github.rest.repos.createCommitStatus({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                sha: context.payload.pull_request.head.sha,
-                state: 'success',
-                context: 'review-enforcement',
-                description: `Approved by ${approvals.length} reviewer(s)`
-              });
-              console.log(`✅ Found ${approvals.length} approval(s)`);
-            }
+      - name: Exit
+        run: |
+          exit 1

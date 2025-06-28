@@ -24,6 +24,7 @@ jobs:
           gh extension install github/gh-copilot
           gh copilot --version
         env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           GH_TOKEN: ${{ github.token }}
           GH_COPILOT_USAGE_COLLECTION: "off"
       - name: Run Copilot tasks

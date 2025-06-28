@@ -35,7 +35,9 @@ jobs:
           gh extension install github/gh-copilot
           gh copilot --version
         env:
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           GH_PROMPT_DISABLED: true
+          GH_COPILOT_USAGE_COLLECTION: "off"
 
       - name: Run Copilot tasks
         run: |
@@ -43,3 +45,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           GH_PROMPT_DISABLED: true
+          GH_COPILOT_USAGE_COLLECTION: "off"

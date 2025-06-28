@@ -24,7 +24,7 @@ jobs:
           gh extension install github/copilot-cli
           gh copilot --version
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       - name: Run Copilot tasks
         run: |
           gh copilot ask "Review this pull request and provide feedback on the code quality, potential issues, and improvements."

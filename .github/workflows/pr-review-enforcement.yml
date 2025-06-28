@@ -8,15 +8,36 @@ on:
     types: [submitted, dismissed]
 
 permissions:
+  models: read
+  actions: write
   statuses: write
   checks: write
   contents: read
   pull-requests: read
 
 jobs:
-  check-reviews:
+  copilot-tasks:
     runs-on: ubuntu-latest
+    environment:
+      name: "main"
+    env:
+      GH_TOKEN: ${{ secrets.NEW_TOKEN }}
+      GH_PROMPT_DISABLED: true
+      GH_COPILOT_USAGE_COLLECTION: "off"
+      GH_COPILOT_NO_PROMPT: true
     steps:
-      - name: Exit
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Verify GitHub CLI authentication
         run: |
-          exit 1
+          gh auth status
+
+      - name: Install and Configure Copilot CLI
+        run: |
+          gh extension install github/gh-copilot
+          gh copilot --version
+
+      - name: Run Copilot tasks
+        run: |
+          gh copilot suggest "Review this pull request and provide feedback on the code quality, potential issues, and improvements."

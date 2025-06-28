@@ -21,19 +21,19 @@ jobs:
     environment:
       name: "main"
     env:
-      GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      # GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       GH_PROMPT_DISABLED: true
       GH_COPILOT_USAGE_COLLECTION: "off"
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
 
+      - name: Authenticate GitHub CLI
+        run: echo "${{ secrets.PERSONAL_TOKEN }}" | gh auth login --with-token
+
       - name: Verify GitHub CLI authentication
         run: |
           gh auth status
-
-      - name: Authenticate GitHub CLI
-        run: echo "${{ secrets.PERSONAL_TOKEN }}" | gh auth login --with-token
 
       - name: Install and Configure Copilot CLI
         run: |

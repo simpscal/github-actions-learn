@@ -28,7 +28,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
       - name: Run Copilot tasks
         run: |
-          gh copilot ask "Review this pull request and provide feedback on the code quality, potential issues, and improvements."
+          gh copilot suggest "Review this pull request and provide feedback on the code quality, potential issues, and improvements."
   # check-reviews:
   #   runs-on: ubuntu-latest
   #   steps:

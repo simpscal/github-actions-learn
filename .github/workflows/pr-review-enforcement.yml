@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Install Copilot CLI
         run: |
-          gh extension install github/copilot-cli
+          gh extension install github/gh-copilot
           gh copilot --version
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}

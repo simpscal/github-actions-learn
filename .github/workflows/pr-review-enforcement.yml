@@ -22,21 +22,31 @@ jobs:
       name: "main"
     steps:
       - name: Checkout project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4 # Updated to v4
+
       - name: Print
         run: echo "Running Copilot tasks for PR review enforcement ${{ vars.E_TEST }}"
-      - name: Install Copilot CLI
+
+      - name: Authenticate with GitHub CLI first
+        run: |
+          echo "${{ secrets.PERSONAL_TOKEN }}" | gh auth login --with-token
+          gh auth status
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+
+      - name: Install and Configure Copilot CLI
         run: |
           gh extension install github/gh-copilot
+          # Handle the data collection prompt non-interactively
+          printf "No\n" | gh copilot config set 2>/dev/null || true
           gh copilot --version
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          GH_TOKEN: ${{ github.token }}
-          GH_COPILOT_USAGE_COLLECTION: "off"
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           GH_PROMPT_DISABLED: true
-      - name: Authenticate with GitHub CLI
-        run: |
-          echo "${{secrets.PERSONAL_TOKEN}}" | gh auth login --with-token
+
       - name: Run Copilot tasks
         run: |
           gh copilot suggest "Review this pull request and provide feedback on the code quality, potential issues, and improvements."
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GH_PROMPT_DISABLED: true

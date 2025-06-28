@@ -16,6 +16,8 @@ permissions:
 jobs:
   copilot-tasks:
     runs-on: ubuntu-latest
+    environment:
+      name: "main"
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
@@ -25,8 +27,8 @@ jobs:
           gh copilot --version
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN  }}
+          GH_TOKEN: ${{ github.token }}
           GH_COPILOT_USAGE_COLLECTION: "off"
       - name: Run Copilot tasks
         run: |
-          gh copilot suggest "Review this pull request and provide feedback on the code quality, potential issues, and improvements"
+          gh copilot suggest "Review this pull request and provide feedback on the code quality, potential issues, and improvements."

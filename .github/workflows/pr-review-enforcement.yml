@@ -32,6 +32,9 @@ jobs:
         run: |
           gh auth status
 
+      - name: Authenticate GitHub CLI
+        run: echo "${{ secrets.PERSONAL_TOKEN }}" | gh auth login --with-token
+
       - name: Install and Configure Copilot CLI
         run: |
           gh extension install github/gh-copilot

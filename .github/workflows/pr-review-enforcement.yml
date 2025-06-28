@@ -32,3 +32,7 @@ jobs:
       - name: Run Copilot tasks
         run: |
           gh copilot suggest "Review this pull request and provide feedback on the code quality, potential issues, and improvements."
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          GH_COPILOT_USAGE_COLLECTION: "off"

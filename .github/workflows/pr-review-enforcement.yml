@@ -22,14 +22,13 @@ jobs:
       name: "main"
     steps:
       - name: Checkout project
-        uses: actions/checkout@v4 # Updated to v4
+        uses: actions/checkout@v4
 
       - name: Print
         run: echo "Running Copilot tasks for PR review enforcement ${{ vars.E_TEST }}"
 
-      - name: Authenticate with GitHub CLI first
+      - name: Verify GitHub CLI authentication
         run: |
-          echo "${{ secrets.PERSONAL_TOKEN }}" | gh auth login --with-token
           gh auth status
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
@@ -38,7 +37,7 @@ jobs:
         run: |
           gh extension install github/gh-copilot
           # Handle the data collection prompt non-interactively
-          printf "No\n" | gh copilot config set 2>/dev/null || true
+          printf "No\n" | gh copilot config 2>/dev/null || true
           gh copilot --version
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}

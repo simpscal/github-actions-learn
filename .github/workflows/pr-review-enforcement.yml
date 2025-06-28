@@ -29,4 +29,4 @@ jobs:
           GH_COPILOT_USAGE_COLLECTION: "off"
       - name: Run Copilot tasks
         run: |
-          gh copilot suggest "Review this pull request and provide feedback on the code quality, potential issues, and improvements."
+          gh copilot suggest "Review this pull request and provide feedback on the code quality, potential issues, and improvements"

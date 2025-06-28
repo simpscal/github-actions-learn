@@ -14,9 +14,23 @@ permissions:
   pull-requests: read
 
 jobs:
-  check-reviews:
+  copilot-tasks:
     runs-on: ubuntu-latest
     steps:
-      - name: fail-for-do-not-merge
+      - name: Checkout project
+        uses: actions/checkout@v2
+      - name: Install Copilot CLI
         run: |
-          exit 1
+          gh extension install github/copilot-cli
+          gh copilot --version
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      - name: Run Copilot tasks
+        run: |
+          gh copilot ask "Review this pull request and provide feedback on the code quality, potential issues, and improvements."
+  # check-reviews:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: fail-for-do-not-merge
+  #       run: |
+  #         exit 1

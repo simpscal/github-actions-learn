@@ -24,6 +24,7 @@ jobs:
       GH_TOKEN: ${{ secrets.NEW_TOKEN }}
       GH_PROMPT_DISABLED: true
       GH_COPILOT_USAGE_COLLECTION: "off"
+      GH_COPILOT_NO_PROMPT: true
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
@@ -36,6 +37,7 @@ jobs:
         run: |
           gh extension install github/gh-copilot
           gh copilot --version
+
       - name: Run Copilot tasks
         run: |
           gh copilot suggest "Review this pull request and provide feedback on the code quality, potential issues, and improvements."
